@@ -1,0 +1,20 @@
+[package]
+name = "load_all_lists_context"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+domain = { path = "../../../domain" }
+config = { path = "../../../config" }
+grpc-interface = { path = "../../../grpc-interface" }
+web-interface = { path = "../../../web-interface" }
+message = { path = "../../../message" }
+repository = { path = "../../../repository" }
+
+[dependencies.web-sys]
+version = "0.3"
+features = [
+    "Window",
+]

@@ -1,0 +1,233 @@
+/* .field-container {} */
+
+.field-wrapper {
+    display: flex;
+    padding: 0.8rem 0;
+}
+
+.field-wrapper>label {
+    width: 4.8rem;
+    padding: 0.8rem 0;
+}
+
+.input-container {
+    flex-grow: 1;
+    position: relative;
+    cursor: text;
+}
+
+.input-wrapper {
+    display: flex;
+    /*suggest-panelのtopを決めるのに必要。*/
+    padding: 0.8rem;
+    border: var(--negative-input-border);
+    border-radius: 0.4rem;
+    position: relative;
+    /*.input-containerに入れるとsuggest-panel-popupのz-indexが上書きされてしまう。*/
+    z-index: var(--input-layer);
+}
+
+.input-wrapper:focus-within {
+    /*border-bottom: var(--focus-input-border);*/
+    outline: solid 0.2rem var(--outline-color);
+}
+
+.input-wrapper>input {
+    width: 100%;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--font-color);
+    caret-color: var(--font-color);
+    outline: none;
+    border: none;
+    caret-color: var(--font-color);
+}
+
+.buttons-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+/*tab focusでのoutline強調のために必要。*/
+.button-wrapper.send-button {
+    border: solid 0.1rem var(--button-color);
+}
+
+.button-wrapper.send-button:focus-within {
+    border: solid 0.1rem transparent;
+}
+
+.button-wrapper.send-button>button {
+    background-color: var(--button-color);
+    color: var(--button-font-color);
+}
+
+.button-wrapper.send-button>button:focus {
+    border-radius: 0.4rem;
+}
+
+.button-wrapper.cancel-button {
+    cursor: pointer;
+}
+
+.annotation-container {
+    width: 100%;
+    height: 100%;
+}
+
+.annotation-wrapper {
+    width: 100%;
+    height: 100%;
+    /* padding: 0.8rem 0; */
+}
+
+/* .annotation-wrapper > details { */
+/*     height: 100%; */
+/* } */
+/* .annotation-wrapper > details > summary { */
+/*     display: flex; */
+/*     height: var(--annotation-button-height); */
+/*     cursor: pointer; */
+/* } */
+/* .annotation-wrapper > div { */
+/*     width: 100%; */
+/*     height: 100%; */
+/*     padding: 0.8rem 0; */
+/* } */
+
+.annotation-label {
+    padding: 0.8rem 0;
+}
+
+.EasyMDEContainer {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    height: calc(var(--sub-height) - var(--annotation-button-height));
+}
+
+.EasyMDEContainer .CodeMirror {
+    background-color: var(--background-color);
+    border: none;
+    /* padding: 1rem 0 0; */
+    padding: 0;
+    z-index: var(--annotation-layer);
+}
+
+.editor-toolbar {
+    border: none;
+    padding: 0 0 1rem;
+    background-color: var(--background-color);
+}
+
+.editor-toolbar.fullscreen {
+    background-color: var(--background-color);
+}
+
+.editor-toolbar>button.active,
+.editor-toolbar>button:hover {
+    background-color: var(--background-color);
+}
+
+.editor-toolbar>button>i {
+    color: var(--font-color);
+}
+
+.CodeMirror {
+    color: var(--font-color);
+}
+
+.CodeMirror-gutters {
+    background-color: var(--gutter-color);
+    border-right: var(--negative-border)
+}
+
+/* textareaのカーソルの色を変える。 */
+/* [参考](https://github.com/sparksuite/simplemde-markdown-editor/issues/765#issuecomment-622054862) */
+.CodeMirror-cursor {
+    border-color: var(--font-color);
+}
+
+.editor-preview {
+    background-color: var(--background-color);
+    z-index: var(--annotation-layer);
+}
+
+.editor-preview-side {
+    border: var(--negative-border);
+}
+
+/* .editor-toolbar { */
+/*     display: flex; */
+/*     flex-flow: row wrap; */
+/* } */
+
+/* .EasyMDEContainer > .CodeMirror { */
+/*     /1* display: flex; *1/ */
+/*     /1* flex-flow: column; *1/ */
+/*     /1* height: 100%; *1/ */
+/*     /1* padding: 1rem 0 0 1rem; *1/ */
+/* } */
+
+.suggest-panel-popup {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    box-shadow: 0 0.6rem 0.8rem 0.1rem var(--primary-shadow);
+}
+
+/*summaryではなく::beforeを要素全体に広げる設定。beforeをclickするとdetails要素のopen属性が消えて、popupが閉じられる。*/
+.suggest-panel-popup[open]>summary::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: transparent;
+    cursor: default;
+}
+
+.suggest-panel-popup>summary {
+    list-style: none;
+}
+
+.suggest-panel-container {
+    position: relative;
+    max-height: 20rem;
+    margin-top: 0.4rem;
+    z-index: var(--suggest-panel-layer);
+    overflow-y: auto;
+    background-color: var(--background-color);
+    /* box-shadow: 0 0.2rem 0.8rem 0 var(--primary-shadow); */
+}
+
+/* .suggest-panel-wrapper {} */
+
+/* .suggest-row-container {} */
+
+#suggest-cursor.suggest-row-container {
+    outline: solid 0.3rem var(--outline-color);
+    margin: 0.3rem;
+    border-radius: 0.2rem;
+}
+
+#suggest-cursor>.suggest-row-wrapper {
+    /*row-wrapper padding - outline padding*/
+    padding: 0.1rem 0.6rem;
+}
+
+.suggest-row-wrapper {
+    display: flex;
+    padding: 0.4rem 0.9rem;
+    cursor: pointer;
+}
+
+/* .suggest-row-title {} */
+
+.suggest-row-count {
+    margin-left: 0.4rem;
+    color: var(--gray-font-color);
+}

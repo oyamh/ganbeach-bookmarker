@@ -1,0 +1,105 @@
+syntax = "proto3";
+
+package gooscut;
+
+service BookmarkAdder {
+    // rpc AddBookmark(AddBookmarkRequest) returns (AddBookmarkResponse);
+    rpc AddBookmarks(AddBookmarksRequest) returns (AddBookmarkResponse);
+}
+
+// message AddBookmarkRequest {
+//     fixed64 parent_id = 1 [jstype = JS_STRING];
+//     uint32 type_code = 2;
+//     string title = 3;
+//     string url = 4;
+//     repeated fixed64 tag_ids = 5 [jstype = JS_STRING];
+//     repeated string unknown_tags = 6;
+// }
+
+message NewBookmarkData {
+    uint32 type_code = 1;
+    string title = 2;
+    string url = 3;
+    string annotation = 4;
+}
+
+message AddBookmarkResponse {
+    uint32 code = 1;
+    string status = 2;
+    string message = 3;
+    repeated AddBookmarkResult results = 4;
+}
+
+message AddBookmarkResult {
+    fixed64 bookmark_id = 1 [jstype = JS_STRING];
+    uint32 type_code = 2;
+    string name = 3;
+    //string icon_url_hash = 4;
+}
+
+//message ResponseDetail {
+//    uint32 code = 1;
+//    string status = 2;
+//    string message = 3;
+//}
+
+// unknown_tagsをnew_bookmarksに統合したい。
+// しかし、保守しづらいか？
+// すぐにbookmarksへのタグ付けだとは理解できない。
+// 現状でも理解はしづらいかもしれない。
+// そもそも、そうでないならNewBookmarkDataのtype_codeプロパティはいらないよな。
+// ほぼlinkだけになりそうだし。
+// そうでないなら、分ける？
+// new_bookmarksの他に、new_foldersとnew_tagsを作る。
+message AddBookmarksRequest {
+    fixed64 parent_id = 1 [jstype = JS_STRING];
+    repeated NewBookmarkData new_bookmarks = 2;
+    repeated fixed64 tag_ids = 3 [jstype = JS_STRING];
+    repeated string new_folders = 4;
+    repeated string new_tags = 5;
+}
+
+service AnnotationAdder {
+    rpc AddAnnotation(AddAnnotationRequest) returns (AddAnnotationResponse);
+}
+
+message AddAnnotationRequest {
+    fixed64 bookmark_id = 1 [jstype = JS_STRING];
+    string annotation = 2;
+}
+
+message AddAnnotationResponse {
+    fixed64 bookmark_id = 1 [jstype = JS_STRING];
+    fixed64 annotation_id = 2 [jstype = JS_STRING];
+    string annotation = 3;
+}
+
+//service TagAdder {
+//    rpc AddTags(AddTagsRequest) returns (AddResponse);
+//}
+//
+//message AddTagsRequest {
+//    fixed64 root_id = 1 [jstype = JS_STRING];
+//    repeated TagParam tag_params = 2;
+//}
+//
+//message TagParam {
+//    string name = 1;
+//    repeated TaggedParam tagged_params = 2;
+//}
+//
+//message TaggedParam {
+//    fixed64 bookmark_id = 1 [jstype = JS_STRING];
+//    //uint32 type_code = 2;
+//}
+//
+//message AddResponse {
+//    int32 code = 1;
+//    string message = 2;
+//    repeated AddedTag added_tags = 3;
+//}
+//
+//message AddedTag {
+//    fixed64 tag_id = 1 [jstype = JS_STRING];
+//    string name = 2;
+//}

@@ -1,0 +1,115 @@
+[package]
+name = "background"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+crate-type = ["cdylib"]
+#crate-type = ["cdylib", "rlib"]
+#crate-type = ["lib"]
+
+# これがあるとrollupのbuildがCargo.tomlのprofile重複エラーによって失敗する。
+# [profile.release]
+# debug = true
+
+[profile.release]
+opt-level = "s"
+lto = true
+strip = true
+codegen-units = 1
+
+# [rust]
+# debug = true
+# debuginfo-level = 2
+
+[profile.dev]
+debug = 2
+
+## これがあるとbuildが失敗してしまう？
+#[[bin]]
+#name = "helloworld-server"
+#path = "src/server.rs"
+#
+#[[bin]]
+#name = "helloworld-client"
+#path = "src/client.rs"
+
+[[bin]]
+name = "helloworld-client"
+path = "src/lib.rs"
+
+[dependencies]
+domain = { path = "../domain" }
+config = { path = "../config" }
+usecase = { path = "../usecase" }
+background_error_context = { path = "../context/background/background_error_context" }
+clean_history_context = { path = "../context/background/clean_history_context" }
+fetch_lists_context = { path = "../context/background/fetch_lists_context" }
+initialize_database_context = { path = "../context/background/initialize_database_context" }
+listen_hotkeys_context = { path = "../context/background/listen_hotkeys_context" }
+listen_messages_context = { path = "../context/background/listen_messages_context" }
+load_access_token_context = { path = "../context/background/load_access_token_context" }
+load_all_lists_context = { path = "../context/background/load_all_lists_context" }
+open_tab_context = { path = "../context/background/open_tab_context" }
+open_window_context = { path = "../context/background/open_window_context" }
+read_bookmark_context = { path = "../context/background/read_bookmark_context" }
+toolbar_context = { path = "../context/background/toolbar_context" }
+
+js-sys = "0.3"
+serde = { version = "1.0", features = ["derive"] }
+wasm-bindgen = { version = "0.2", features = ["serde-serialize"] }
+wasm-bindgen-futures = "0.4"
+wasm-logger = "0.2"
+# log = { version = "0.4", features = [
+#     "max_level_error",
+#     "release_max_level_error",
+# ] }
+log = { version = "0.4", features = ["release_max_level_error"] }
+futures = "0.3"
+console_error_panic_hook = "0.1.7"
+getrandom = { version = "0.2.7", features = ["js"] }
+serde-wasm-bindgen = "0.4"
+thiserror = "1.0"
+
+[dev-dependencies]
+tokio = { version = "1.21", features = ["macros", "rt"] }
+wasm-bindgen-test = "0.3.31"
+
+# `wee_alloc` is a tiny allocator for wasm that is only ~1K in code size
+# compared to the default allocator's ~10K. It is slower than the default
+# allocator, however.
+#
+# Unfortunately, `wee_alloc` requires nightly Rust when targeting wasm for now.
+#wee_alloc = { version = "0.4.5", optional = true }
+#wee_allocは本番用？有効にすると[dev-dependencies]が使えない。
+
+[dependencies.web-sys]
+version = "0.3"
+features = ["console", "DomException"]
+
+[dependencies.uuid]
+version = "1.1.2"
+features = ["v4"]
+
+#[dependencies.getrandom]
+#version = "0.2"
+#default-features = false
+#features = ["js"]
+
+# [dependencies.web-interface]
+# path = "../web-interface"
+# features = ["console_error_panic_hook"]
+
+# # web-interfaceはchromeとfirefoxでfeaturesを設定してビルドするために依存関係に入れる。
+# web-interface = { path = "../web-interface", features = ["console_error_panic_hook"] }
+[dependencies.web-interface]
+path = "../web-interface"
+features = ["console_error_panic_hook"]
+default-features = false
+
+[features]
+# default = ["web-interface/chrome"]
+chrome = ["web-interface/chrome"]
+firefox = ["web-interface/firefox"]

@@ -1,0 +1,27 @@
+[package]
+name = "bookmark-extension"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+members = [
+    "src/domain",
+    "src/message",
+    "src/hotkey",
+    "src/background",
+    "src/popup",
+    "src/web-interface",
+    "src/grpc-interface",
+    "src/usecase",
+    "src/context/background/*",
+    "src/context/popup/*",
+    "src/indexed-db",
+    "src/public-messenger",
+    "src/repository",
+    "src/config",
+    "src/popup_toolbar",
+]
+exclude = ["dev/builder"]
+
+# TODO: workspace.dependenciesの機能を調べる。 2023-02-07 16:15:32
+# [workspace.dependencies]

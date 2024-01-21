@@ -1,0 +1,91 @@
+[package]
+name = "popup"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[profile.release]
+opt-level = "s"
+lto = true
+strip = true
+codegen-units = 1
+
+# [rust]
+# debug = true
+# debuginfo-level = 2
+
+[profile.dev]
+debug = 2
+
+[dependencies]
+config = { path = "../config" }
+domain = { path = "../domain" }
+usecase = { path = "../usecase" }
+request_lists_context = { path = "../context/popup/request_lists_context" }
+request_page_data_context = { path = "../context/popup/request_page_data_context" }
+request_tab_context = { path = "../context/popup/request_tab_context" }
+load_history_context = { path = "../context/popup/load_history_context" }
+extract_popup_origin_context = { path = "../context/popup/extract_popup_origin_context" }
+load_access_token_context = { path = "../context/background/load_access_token_context" }
+create_bookmark_context = { path = "../context/popup/create_bookmark_context" }
+message = { path = "../message" }
+
+
+# `wee_alloc` is a tiny allocator for wasm that is only ~1K in code size
+# compared to the default allocator's ~10K. It is slower than the default
+# allocator, however.
+#
+# Unfortunately, `wee_alloc` requires nightly Rust when targeting wasm for now.
+wee_alloc = { version = "0.4.5", optional = true }
+js-sys = "0.3"
+serde = { version = "1.0", features = ["derive"] }
+wasm-bindgen = { version = "0.2", features = ["serde-serialize"] }
+wasm-bindgen-futures = "0.4"
+wasm-logger = "0.2"
+log = { version = "0.4", features = ["release_max_level_off"] }
+yew = { version = "0.20", featrues = ["csr"], features = ["csr"] }
+serde-wasm-bindgen = "0.4"
+gloo-utils = "0.1"
+gloo-events = "0.1"
+gloo-timers = { version = "0.2.6", features = ["futures"] }
+futures = "0.3"
+
+[dependencies.web-sys]
+version = "0.3"
+features = [
+    "console",
+    "Window",
+    "Document",
+    "Element",
+    "HtmlInputElement",
+    "HtmlButtonElement",
+    "HtmlDialogElement",
+    "Node",
+    "InputEvent",
+    "KeyboardEvent",
+    "MessageEvent",
+    "ShadowRoot",
+    "ShadowRootInit",
+    "ShadowRootMode",
+    "ScrollIntoViewOptions",
+    "ScrollLogicalPosition",
+]
+
+[dependencies.web-interface]
+path = "../web-interface"
+features = ["console_error_panic_hook"]
+default-features = false
+
+[features]
+# default = ["web-interface/chrome"]
+chrome = ["web-interface/chrome"]
+firefox = ["web-interface/firefox"]
+
+[dev-dependencies]
+request_create_bookmark_context_mock = { path = "../context/popup/request_create_bookmark_context_mock" }
+
+wasm-bindgen-test = "0.3.33"

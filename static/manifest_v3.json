@@ -1,0 +1,45 @@
+{
+    "manifest_version": 3,
+    "name": "Ganbeach Bookmark Manager",
+    "version": "0.1.0",
+    "description": "Ganbeach Bookmark Manager",
+    "background": {
+        "service_worker": "js/background-script-inject.js",
+        "type": "module"
+    },
+    "permissions": [
+        "activeTab",
+        "tabs",
+        "cookies",
+        "bookmarks",
+        "notifications",
+        "history"
+    ],
+    "host_permissions": [
+        "https://ganbeach.com/",
+        "https://user.ganbeach.com/",
+        "https://bookmark.ganbeach.com/",
+        "https://file.ganbeach.com/"
+    ],
+    "action": {
+        "default_title": "ganbeach-bookmark-extension"
+    },
+    "commands": {
+        "open-popup": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+L",
+                "windows": "Ctrl+Shift+L",
+                "mac": "Command+Shift+L"
+            },
+            "description": "Open the popup"
+        }
+    },
+    "icons": {
+        "16": "icons/rounded/16x16.png",
+        "48": "icons/rounded/48x48.png",
+        "128": "icons/rounded/128x128.png"
+    },
+    "content_security_policy": {
+        "extension_pages": "worker-src 'self'; script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; frame-src 'self'"
+    }
+}

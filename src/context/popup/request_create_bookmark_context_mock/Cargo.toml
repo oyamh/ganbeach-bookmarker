@@ -1,0 +1,24 @@
+[package]
+name = "request_create_bookmark_context_mock"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+domain = { path = "../../../domain" }
+
+serde = "1.0"
+gloo-events = "0.1.2"
+serde-wasm-bindgen = "0.4.5"
+
+[dependencies.web-sys]
+version = "0.3"
+features = [
+    "HtmlElement",
+    "Window",
+    "Document",
+    "Element",
+    "MouseEvent",
+    "ProgressEvent",
+]

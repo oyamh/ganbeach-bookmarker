@@ -1,0 +1,48 @@
+.stored-list-wrapper {
+    display: flex;
+    padding: 0.8rem 0;
+    cursor: pointer;
+}
+
+.stored-list-wrapper:hover>.stored-list-title {
+    text-decoration: underline;
+}
+
+.stored-list-icon {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 0.2rem;
+}
+
+.stored-list-icon>svg {
+    fill: currentColor;
+}
+
+.stored-list-title {
+    height: 2rem;
+    position: relative;
+}
+
+.stored-list-title:after {
+    position: absolute;
+    top: 0.3rem;
+    right: -1.5rem;
+    content: "\1f855";
+    font-size: 1.3rem;
+    color: var(--font-color);
+    line-height: 0.3rem;
+    height: 0.5rem;
+    width: 0.5rem;
+    border-right: 0.2rem solid var(--background-color);
+    border-top: 0.2rem solid var(--background-color);
+}
+
+.stored-list-title:before {
+    position: absolute;
+    top: 0.4rem;
+    right: -1.5rem;
+    content: " ";
+    border: 0.1rem solid var(--font-color);
+    width: 0.8rem;
+    height: 0.8rem;
+}

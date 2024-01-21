@@ -1,0 +1,16 @@
+[package]
+name = "load_access_token_context"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+domain = { path = "../../../domain" }
+config = { path = "../../../config" }
+web-interface = { path = "../../../web-interface" }
+grpc-interface = { path = "../../../grpc-interface" }
+repository = { path = "../../../repository" }
+
+# [lints.rust]
+# refining_impl_trait = "allow"

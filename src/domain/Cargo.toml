@@ -1,0 +1,32 @@
+[package]
+name = "domain"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+config = { path = "../config" }
+
+# time = { version = "0.3", features = ["std"] }
+# js-sys = "0.3"
+# wasm-bindgen-futures = "0.4"
+serde = { version = "1.0", features = ["derive"] }
+gloo-events = "0.1"
+instant = { version = "0.1", features = ["wasm-bindgen"] }
+wasm-bindgen = { version = "0.2", features = ["serde-serialize"] }
+serde-wasm-bindgen = "0.4"
+log = { version = "0.4", features = ["release_max_level_off"] }
+url = { version = "2.3.1", features = ["serde"] }
+base64 = "0.13"
+serde_json = "1.0.96"
+thiserror = "1.0.43"
+js-sys = "0.3"
+
+[dependencies.web-sys]
+version = "0.3"
+features = ["Window"]
+
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3"

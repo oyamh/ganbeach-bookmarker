@@ -1,0 +1,37 @@
+#dialog-container {
+    border: none;
+    border-radius: 0.2rem;
+    color: var(--font-color);
+    background: var(--dialog-color);
+    border: solid 0.1rem rgba(var(--font-color-rgb), 0.1);
+    box-shadow: 0 0.2rem 0.8rem 0 var(--primary-shadow);
+}
+
+#dialog-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2.4rem;
+}
+
+/*tab focusでのoutline強調のために必要。*/
+.button-wrapper.ok-button {
+    border: solid 0.1rem var(--button-color);
+}
+
+.button-wrapper.ok-button:focus-within {
+    border: solid 0.1rem transparent;
+}
+
+.button-wrapper.ok-button>button {
+    background-color: var(--button-color);
+    color: var(--button-font-color);
+}
+
+.button-wrapper.ok-button>button:focus {
+    border-radius: 0.4rem;
+}
+
+#dialog-label {
+    margin-bottom: 1.6rem;
+}

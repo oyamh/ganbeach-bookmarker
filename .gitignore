@@ -1,0 +1,12 @@
+/build/
+/dist/
+/target/
+**/target/
+Cargo.lock
+**/*.rs.bk
+*.pdb
+node_modules
+package-lock.json
+package.json
+
+.vscode

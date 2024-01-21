@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+package gooscut;
+
+service Accounter {
+    rpc GenerateLoginUrl (LoginUrlRequest) returns (LoginUrlResponse);
+    rpc GenerateAccessToken (AccessTokenRequest) returns (AccessTokenResponse);
+    rpc Login (LoginRequest) returns (LoginResponse);
+    rpc Logout (LogoutRequest) returns (LogoutResponse);
+    rpc SendMagicLink (MagicLinkRequest) returns (MagicLinkResponse);
+    rpc SendAuthCode (AuthCodeRequest) returns (AuthCodeResponse);
+    rpc SendConfirmationEmail(ConfirmationEmailRequest) returns (ConfirmationEmailResponse);
+    rpc CloseAccount(CloseAccountRequest) returns (CloseAccountResponse);
+}
+
+message LoginUrlRequest {
+    string provider = 1;
+}
+
+message LoginUrlResponse {
+    string url = 1;
+}
+
+message AccessTokenRequest {
+    string old_access_token = 1;
+}
+
+message AccessTokenResponse {
+    string access_token = 1;
+    string login_url = 2;
+}
+
+message LoginRequest {
+    string code = 1;
+    string state = 2;
+    string provider = 3;
+}
+
+message LoginResponse {
+    string access_token = 1;
+}
+
+message LogoutRequest {
+}
+
+message LogoutResponse {
+    int64 code = 1;
+}
+
+message AuthCodeRequest {
+    string email = 1;
+}
+
+message AuthCodeResponse {
+    string state_token = 1;
+}
+
+message MagicLinkRequest {
+    string email = 1;
+}
+
+message MagicLinkResponse {
+    string code = 1;
+    string message = 2;
+}
+
+message ConfirmationEmailRequest {}
+
+message ConfirmationEmailResponse {
+    int32 code = 1;
+    string message = 2;
+}
+
+message CloseAccountRequest {
+    string code = 1;
+    string state = 2;
+}
+
+message CloseAccountResponse {
+    int32 code = 1;
+    string message = 2;
+}

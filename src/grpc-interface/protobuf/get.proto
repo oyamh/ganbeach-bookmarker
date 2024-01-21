@@ -1,0 +1,121 @@
+syntax = "proto3";
+
+//import "google/protobuf/timestamp.proto";
+
+package gooscut;
+
+service BookmarkGetter {
+    rpc GetAllLists(GetAllListsRequest) returns (Lists);
+    rpc GetByListId(GetByListIdRequest) returns (Bookmarks);
+    rpc GetByBookmarkIds(GetByBookmarkIdsRequest) returns (Bookmarks);
+    rpc SearchBookmarks(SearchBookmarksRequest) returns (Bookmarks);
+    //rpc GetAllHelpLists(...?) returns (Lists);
+    //rpc GetByParentId(GetByParentIdRequest) returns (Bookmarks);
+}
+
+message GetAllListsRequest {
+}
+
+message GetByListIdRequest {
+    fixed64 list_id = 1 [jstype = JS_STRING];
+    uint32 type_code = 2;
+}
+
+message GetByBookmarkIdsRequest {
+    repeated fixed64 bookmark_ids = 1 [jstype = JS_STRING];
+}
+
+message SearchBookmarksRequest {
+    repeated Query queries = 1;
+    //repeated fixed64 bookmark_ids = 3 [jstype = JS_STRING];//帯域節約のために、これに頼らずやってみる。
+}
+
+message Query {
+    oneof query {
+        fixed64 user_id = 1 [jstype = JS_STRING];
+        fixed64 excluded_user_id = 2 [jstype = JS_STRING];
+        fixed64 folder_id = 3 [jstype = JS_STRING];
+        fixed64 excluded_folder_id = 4 [jstype = JS_STRING];
+        fixed64 tag_id = 5 [jstype = JS_STRING];
+        fixed64 excluded_tag_id = 6 [jstype = JS_STRING];
+        fixed64 recursive_folder_id = 7 [jstype = JS_STRING];
+        fixed64 recursive_tag_id = 8 [jstype = JS_STRING];
+        uint32 type_code = 9;
+        uint32 excluded_type_code = 10;
+        uint64 visit_more_count = 11;
+        uint64 visit_less_count = 12;
+        int64 created_before = 13;
+        int64 created_after = 14;
+        int64 updated_before = 15;
+        int64 updated_after = 16;
+        int64 last_visit_before = 17;
+        int64 last_visit_after = 18;
+        bool has_annotation = 19;
+        string title = 20;
+        string excluded_title = 21;
+        string url = 22;
+        string excluded_url = 23;
+        string domain = 24;
+        string excluded_domain = 25;
+        string content = 26;
+        string excluded_content = 27;
+        string annotation = 28;
+    }
+}
+
+//        google.protobuf.Timestamp created_before = 12;
+//        google.protobuf.Timestamp created_after = 13;
+//        google.protobuf.Timestamp updated_before = 14;
+//        google.protobuf.Timestamp updated_after = 15;
+//        google.protobuf.Timestamp last_visit_before = 16;
+//        google.protobuf.Timestamp last_visit_after = 17;
+
+//TODO: + code, message
+message Lists {
+    repeated List lists = 1;
+}
+
+message List {
+    fixed64 user_id = 1 [jstype = JS_STRING];
+    fixed64 bookmark_id = 2 [jstype = JS_STRING];
+    fixed64 parent_id = 3 [jstype = JS_STRING];
+    uint32 type_code = 4;
+    uint32 child_count = 5;
+    uint64 position = 6;
+    int64 created_at = 7;
+    int64 updated_at = 8;
+    int64 last_visit = 9;
+    string title = 10;
+}
+
+//    google.protobuf.Timestamp created_at = 6;
+//    google.protobuf.Timestamp updated_at = 7;
+//    google.protobuf.Timestamp last_visit = 8;
+
+//TODO: + code, message
+message Bookmarks {
+    repeated Bookmark bookmarks = 1;
+}
+
+message Bookmark {
+    fixed64 user_id = 1 [jstype = JS_STRING];
+    fixed64 bookmark_id = 2 [jstype = JS_STRING];
+    fixed64 parent_id = 3 [jstype = JS_STRING];
+    uint32 type_code = 4; // 本当はuint16
+    uint64 position = 5;
+    uint64 visit_count = 6;
+    int64 created_at = 7;
+    int64 updated_at = 8;
+    int64 last_visit = 9;
+    string icon_url_hash = 10;
+    string title = 11;
+    string url = 12;
+    string annotation = 13;
+    repeated fixed64 tag_ids = 14 [jstype = JS_STRING];
+}
+
+
+//    google.protobuf.Timestamp created_at = 6;
+//    google.protobuf.Timestamp updated_at = 7;
+//    google.protobuf.Timestamp last_visit = 8;
+
