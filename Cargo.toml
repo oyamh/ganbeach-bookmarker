@@ -1,5 +1,5 @@
 [package]
-name = "bookmark-extension"
+name = "ganbeach-bookmarker"
 version = "0.1.0"
 edition = "2021"
 
@@ -22,6 +22,3 @@ members = [
     "src/popup_toolbar",
 ]
 exclude = ["dev/builder"]
-
-# TODO: workspace.dependenciesの機能を調べる。 2023-02-07 16:15:32
-# [workspace.dependencies]
