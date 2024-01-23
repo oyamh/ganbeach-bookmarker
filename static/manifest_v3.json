@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "Ganbeach Bookmark Manager",
+    "name": "Ganbeach Bookmarker",
     "version": "0.1.0",
-    "description": "Ganbeach Bookmark Manager",
+    "description": "Ganbeach Bookmarker",
     "background": {
         "service_worker": "js/background-script-inject.js",
         "type": "module"
@@ -22,7 +22,7 @@
         "https://file.ganbeach.com/"
     ],
     "action": {
-        "default_title": "ganbeach-bookmark-extension"
+        "default_title": "ganbeach-bookmarker"
     },
     "commands": {
         "open-popup": {
