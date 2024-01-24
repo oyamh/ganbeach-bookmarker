@@ -28,8 +28,9 @@ Install via [Firefox add-ons]() (Comming soon)
 4. Browse the `ganbeach-bookmarker/build/firefox/manifest.json` file and select it.
 
 ### Build from source
-1. Clone this repository.
-2. Run build script in `ganbeach-bookmarker`.
+1. Install [Cargo](https://github.com/rust-lang/cargo).
+2. Clone this repository.
+3. Run build script in `ganbeach-bookmarker`.
 - Chrome
     ```bash
     $ ./script/release/chrome.sh
@@ -38,7 +39,7 @@ Install via [Firefox add-ons]() (Comming soon)
     ```bash
     $ ./script/release/firefox.sh
     ```
-3. Install the contents of directory `ganbeach-bookmarker/dist` locally.
+4. Install the contents of directory `ganbeach-bookmarker/dist` locally.
 
 ## Usage
 This is just a bookmarker.
