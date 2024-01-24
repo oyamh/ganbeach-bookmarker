@@ -1,7 +1,7 @@
 # Ganbeach Bookmarker
 
 ## Features
-- Browser extension to add bookmarks to Ganbeach.
+- Browser extension to add bookmarks to [Ganbeach](https://ganbeach.com).
 - You can add tags and annotation.
 
 ## Installation
@@ -15,18 +15,20 @@ Install via [Firefox add-ons]() (Comming soon)
 ### Install Locally
 
 #### Chrome
-1. Go to [the extensions page](chrome://extensions). -> `chrome://extensions`
-2. Enable Developer Mode.
-3. Click on `Load unpacked` button
-4. Browse the `ganbeach-bookmarker/dist/chrome` directory and select it.
+1. Clone this repository or Download `ganbeach-bookmarker/build/chrome`.
+2. Go to [the extensions page](chrome://extensions). -> `chrome://extensions`
+3. Enable Developer Mode.
+4. Click on `Load unpacked` button
+5. Browse the `ganbeach-bookmarker/build/chrome` directory and select it.
 
 #### Firefox
-1. Go to [the addons](about:debugging#addons). -> `about:debugging#addons`
-2. Click the `Load Temporary Add-On` button,
-3. Browse the `ganbeach-bookmarker/dist/firefox/manifest.json` file and select it.
+1. Clone this repository or Download `ganbeach-bookmarker/build/firefox`.
+2. Go to [the addons](about:debugging#addons). -> `about:debugging#addons`
+3. Click the `Load Temporary Add-On` button,
+4. Browse the `ganbeach-bookmarker/build/firefox/manifest.json` file and select it.
 
 ### Build from source
-1. `git clone `
+1. Clone this repository.
 2. Run build script in `ganbeach-bookmarker`.
 - Chrome
     ```bash
@@ -36,6 +38,7 @@ Install via [Firefox add-ons]() (Comming soon)
     ```bash
     $ ./script/release/firefox.sh
     ```
+3. Install the contents of directory `ganbeach-bookmarker/dist` locally.
 
 ## Usage
 This is just a bookmarker.
