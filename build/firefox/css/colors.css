@@ -1,0 +1,86 @@
+/*rgb*/
+:root {
+    --white-rgb: 250, 250, 250;
+    --bright-gray-rgb: 204, 204, 204;
+    --sub-gray-rgb: 153, 153, 153;
+    --primary-gray-rgb: 102, 102, 102;
+    --dark-gray-rgb: 51, 51, 51;
+    /*--black-rgb: 0, 0, 0;*/
+    --black-rgb: 5, 5, 5;
+
+    --gray-rgb: var(--primary-gray-rgb);
+}
+
+/*color*/
+:root {
+    /* --main-font-color: rgb(var(--font-color-rgb)); */
+    --font-color: rgb(var(--font-color-rgb));
+    --background-color: rgb(var(--primary-background-rgb));
+    --button-color: rgb(50, 130, 220);
+    /* --button-font-color: rgb(var(--button-font-color-rgb)); */
+    --button-font-color: var(--white-rgb);
+    --gray-font-color: rgba(var(--font-color-rgb), 0.6);
+    --gray: rgb(var(--gray-rgb));
+}
+
+/*border*/
+:root {
+    --strong-border-color: rgb(var(--dark-gray-rgb));
+    --primary-border-color: rgba(var(--gray-rgb), 0.5);
+    --sub-border-color: rgba(var(--gray-rgb), 0.2);
+}
+
+/*theme*/
+@media (prefers-color-scheme: light) {
+    :root {
+        /* :root[data-theme="light"] */
+        --font-color-rgb: 30, 30, 30;
+        /* --button-font-color-rgb: var(--white-rgb); */
+        --primary-color-rgb: var(--white-rgb);
+        --primary-background-rgb: var(--primary-color-rgb);
+        --primary-shadow: rgba(var(--gray-rgb), 0.1);
+        /*--outline-color: #0060df;*/
+        --outline-color: rgb(150, 200, 255);
+        --dialog-color: rgb(221, 221, 221);
+        --gutter-color: rgb(221, 221, 221);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* :root[data-theme="dark"] */
+        --font-color-rgb: var(--white-rgb);
+        /* --button-font-color-rgb: 30, 30, 30; */
+        --primary-color-rgb: 18, 18, 18;
+        --primary-background-rgb: var(--primary-color-rgb);
+        --primary-shadow: rgba(0, 0, 0, 0);
+        /*--outline-color: #0060df;*/
+        --outline-color: rgb(100, 150, 200);
+        --dialog-color: rgb(34, 34, 34);
+        --gutter-color: rgb(34, 34, 34);
+    }
+}
+
+/*
+:root[theme="firefox"] {
+    --outline-color: #00ddff;
+    --background-color: #42414d;
+    --button-color: #00ddff;
+    --border-color: #8f8f9d;
+}*/
+
+/*
+:root[theme="chrome-light"] {
+    --outline-color: #1a73e8;
+    --background-color: #ffffff;
+    --button-color: #1a73e8;
+    --border-color: #dadce0;
+}*/
+
+/*
+:root[theme="chrome-dark"] {
+    --outline-color: #8ab4f8;
+    --background-color: #292a2d;
+    --button-color: #8ab4f8;
+    --border-color: #3c4043;
+}*/

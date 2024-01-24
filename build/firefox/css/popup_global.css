@@ -1,0 +1,21 @@
+@import "colors.css";
+@import "fonts.css";
+@import "layouts.css";
+@import "layer.css";
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: var(--root-font-family);
+    font-size: var(--root-font-size);
+    /* color: var(--main-font-color); */
+    color: var(--font-color);
+}
+
+body {
+    font-size: var(--main-font-size);
+    margin: 0;
+    background-color: var(--background-color);
+}

@@ -1,0 +1,53 @@
+/*font*/
+:root {
+    --root-font-size: 10px;
+    --main-font-size: 130%;
+}
+
+/*size*/
+:root {
+    --width: 100vw;
+    --height: 100vh;
+
+    --app-wrapper-padding: 1.6rem;
+
+    --header-height: 1.8rem;
+    --body-height: calc(var(--height) - calc(var(--app-wrapper-padding) * 2) - var(--header-height));
+    /* --main-height: 19rem;
+    --sub-height: calc(var(--body-height) - var(--main-height)); */
+
+    --annotation-button-height: 3.4rem;
+}
+
+:root[data-scene="input"] {
+    --main-height: 19rem;
+    --sub-height: calc(var(--body-height) - var(--main-height));
+}
+
+:root[data-scene="created"],
+:root[data-scene="creating"],
+:root[data-scene="error"] {
+    /* --main-height: var(--body-height);
+    --sub-height: 0; */
+    --main-height: 1fr;
+    --sub-height: 3.4rem;
+}
+
+/* :root[data-scene="creating"] {} */
+/* :root[data-scene="error"] {} */
+
+/*grid*/
+:root {
+    --popup-grid-template:
+        "header" var(--header-height) "main" var(--main-height) "sub" var(--sub-height) /
+        1fr;
+}
+
+/*border*/
+:root {
+    --negative-border: solid 0.1rem var(--sub-border-color);
+
+    --input-border: solid 0.1rem var(--primary-border-color);
+    --focus-input-border: solid 0.1rem var(--strong-border-color);
+    --negative-input-border: solid 0.1rem var(--sub-border-color);
+}

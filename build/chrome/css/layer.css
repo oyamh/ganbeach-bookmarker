@@ -1,0 +1,9 @@
+/*z-index*/
+:root {
+    --input-layer: 20;
+    --created-layer: 20;
+    /* --suggest-panel-layer: 100; */
+    --popup-layer: 500;
+    --annotation-layer: 1000;
+    --suggest-panel-layer: 1500;
+}
