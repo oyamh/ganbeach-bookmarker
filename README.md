@@ -10,7 +10,7 @@
 Install via [Chrome web store]() (Comming soon)
 
 ### Firefox
-Install via [Firefox add-ons]() (Comming soon)
+Install via [Firefox add-ons](https://addons.mozilla.org/firefox/addon/ganbeach-bookmarker/)
 
 ### Install Locally
 
