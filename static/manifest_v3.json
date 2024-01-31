@@ -18,8 +18,7 @@
     "host_permissions": [
         "https://ganbeach.com/",
         "https://user.ganbeach.com/",
-        "https://bookmark.ganbeach.com/",
-        "https://file.ganbeach.com/"
+        "https://bookmark.ganbeach.com/"
     ],
     "action": {
         "default_title": "ganbeach-bookmarker"
