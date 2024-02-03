@@ -7,7 +7,7 @@
 ## Installation
 
 ### Chrome
-Install via [Chrome web store]() (Comming soon)
+Install via [Chrome web store](https://chromewebstore.google.com/detail/ganbeach-bookmarker/jddhooblgpikkhhdhoebgjohoglmincf)
 
 ### Firefox
 Install via [Firefox add-ons](https://addons.mozilla.org/firefox/addon/ganbeach-bookmarker/)
