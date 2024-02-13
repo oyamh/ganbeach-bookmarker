@@ -1,9 +1,6 @@
+use crate::components::{input_popup::InputPopup, suggest_row::SuggestRow};
 use crate::hooks::use_suggest::use_suggest;
-use crate::{
-    components::{input_popup::InputPopup, suggest_row::SuggestRow},
-    hooks::use_suggest::SuggestResults,
-};
-use domain::TypeCode;
+use domain::{SuggestResults, TypeCode};
 use gloo_events::{EventListener, EventListenerOptions};
 use wasm_bindgen::JsCast;
 use web_sys::{Element, HtmlInputElement, ScrollIntoViewOptions, ScrollLogicalPosition};

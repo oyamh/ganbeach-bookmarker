@@ -9,7 +9,8 @@ use serde::{Deserialize, Serialize};
 use wasm_bindgen::JsValue;
 
 use crate::{
-    BookmarkId, DatabaseAccessor, DatabaseAccessorProvider, DomainError, List, Title, TypeCode,
+    BookmarkId, DatabaseAccessor, DatabaseAccessorProvider, DomainError, List, SuggestInfo, Title,
+    TypeCode,
 };
 
 type ListMap = HashMap<BookmarkId, List>;
@@ -129,30 +130,6 @@ impl<'de> Deserialize<'de> for Lists {
     }
 }
 
-#[test]
-fn should_max_by() {
-    let list_vec = vec![
-        List::builder()
-            .set_bookmark_id(1)
-            .set_type_code(TypeCode::Folder.into())
-            .set_updated_at(1)
-            .build(),
-        List::builder()
-            .set_bookmark_id(2)
-            .set_type_code(TypeCode::Folder.into())
-            .set_updated_at(2)
-            .build(),
-        List::builder()
-            .set_bookmark_id(3)
-            .set_type_code(TypeCode::Folder.into())
-            .set_updated_at(3)
-            .build(),
-    ];
-    let lists = Lists::new(list_vec);
-    let f = lists.latest_folder();
-    println!("{f:#?}");
-}
-
 impl Display for Lists {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{:?}", self.0)
@@ -163,51 +140,6 @@ impl From<Vec<List>> for Lists {
     fn from(list_vec: Vec<List>) -> Self {
         Self::new(list_vec)
     }
-}
-
-#[test]
-fn should_lists_from_vec() {
-    let list_vec = vec![
-        List::builder()
-            .set_bookmark_id(1)
-            .set_title("list1".to_string())
-            .build(),
-        List::builder()
-            .set_bookmark_id(2)
-            .set_title("list2".to_string())
-            .build(),
-        List::builder()
-            .set_bookmark_id(3)
-            .set_title("list3".to_string())
-            .build(),
-    ];
-    let lists = Lists::from(list_vec);
-    assert_eq!(3, lists.len());
-}
-
-#[test]
-fn should_overwrite_same_bookmark_id() {
-    let list_vec = vec![
-        List::builder()
-            .set_bookmark_id(1)
-            .set_title("list1".to_string())
-            .build(),
-        List::builder()
-            .set_bookmark_id(1)
-            .set_title("list2".to_string())
-            .build(),
-        List::builder()
-            .set_bookmark_id(1)
-            .set_title("list3-overwrited".to_string())
-            .build(),
-    ];
-    let lists = Lists::from(list_vec);
-    assert_eq!(1, lists.len());
-}
-
-pub trait SuggestInfo {
-    fn title(&self) -> &Title;
-    fn child_count(&self) -> u32;
 }
 
 impl SuggestInfo for List {
@@ -317,33 +249,102 @@ impl From<&Lists> for TitleMap {
 //     }
 // }
 
-#[test]
-fn should_title_map_from_lists_pointer() {
-    let list_1 = List::builder()
-        .set_bookmark_id(1)
-        .set_title("list1".to_string())
-        .set_type_code(TypeCode::Link.into())
-        .build();
-    let list_2 = List::builder()
-        .set_bookmark_id(2)
-        .set_title("list2".to_string())
-        .set_type_code(TypeCode::Folder.into())
-        .build();
-    let list_3 = List::builder()
-        .set_bookmark_id(3)
-        .set_title("list3".to_string())
-        .set_type_code(TypeCode::Tag.into())
-        .build();
-    let list_4 = List::builder()
-        .set_bookmark_id(4)
-        .set_title("list4".to_string())
-        .set_type_code(TypeCode::Tag.into())
-        .build();
-    let list_vec = vec![list_1, list_2, list_3, list_4];
-    let lists = Lists::from(list_vec);
-    let title_map = TitleMap::from(&lists);
-    println!("{title_map:#?}");
-    assert_eq!(2, title_map.len());
-    assert_eq!(1, title_map.get(&TypeCode::Folder).unwrap().len());
-    assert_eq!(2, title_map.get(&TypeCode::Tag).unwrap().len());
+#[cfg(test)]
+mod lists_test {
+    use super::*;
+
+    #[test]
+    fn should_max_by() {
+        let list_vec = vec![
+            List::builder()
+                .set_bookmark_id(1)
+                .set_type_code(TypeCode::Folder.into())
+                .set_updated_at(1)
+                .build(),
+            List::builder()
+                .set_bookmark_id(2)
+                .set_type_code(TypeCode::Folder.into())
+                .set_updated_at(2)
+                .build(),
+            List::builder()
+                .set_bookmark_id(3)
+                .set_type_code(TypeCode::Folder.into())
+                .set_updated_at(3)
+                .build(),
+        ];
+        let lists = Lists::new(list_vec);
+        let f = lists.latest_folder();
+        println!("{f:#?}");
+    }
+
+    #[test]
+    fn should_lists_from_vec() {
+        let list_vec = vec![
+            List::builder()
+                .set_bookmark_id(1)
+                .set_title("list1".to_string())
+                .build(),
+            List::builder()
+                .set_bookmark_id(2)
+                .set_title("list2".to_string())
+                .build(),
+            List::builder()
+                .set_bookmark_id(3)
+                .set_title("list3".to_string())
+                .build(),
+        ];
+        let lists = Lists::from(list_vec);
+        assert_eq!(3, lists.len());
+    }
+
+    #[test]
+    fn should_overwrite_same_bookmark_id() {
+        let list_vec = vec![
+            List::builder()
+                .set_bookmark_id(1)
+                .set_title("list1".to_string())
+                .build(),
+            List::builder()
+                .set_bookmark_id(1)
+                .set_title("list2".to_string())
+                .build(),
+            List::builder()
+                .set_bookmark_id(1)
+                .set_title("list3-overwrited".to_string())
+                .build(),
+        ];
+        let lists = Lists::from(list_vec);
+        assert_eq!(1, lists.len());
+    }
+
+    #[test]
+    fn should_title_map_from_lists_pointer() {
+        let list_1 = List::builder()
+            .set_bookmark_id(1)
+            .set_title("list1".to_string())
+            .set_type_code(TypeCode::Link.into())
+            .build();
+        let list_2 = List::builder()
+            .set_bookmark_id(2)
+            .set_title("list2".to_string())
+            .set_type_code(TypeCode::Folder.into())
+            .build();
+        let list_3 = List::builder()
+            .set_bookmark_id(3)
+            .set_title("list3".to_string())
+            .set_type_code(TypeCode::Tag.into())
+            .build();
+        let list_4 = List::builder()
+            .set_bookmark_id(4)
+            .set_title("list4".to_string())
+            .set_type_code(TypeCode::Tag.into())
+            .build();
+        let list_vec = vec![list_1, list_2, list_3, list_4];
+        let lists = Lists::from(list_vec);
+        let title_map = TitleMap::from(&lists);
+        println!("{title_map:#?}");
+        assert_eq!(2, title_map.len());
+        assert_eq!(1, title_map.get(&TypeCode::Folder).unwrap().len());
+        assert_eq!(2, title_map.get(&TypeCode::Tag).unwrap().len());
+    }
 }

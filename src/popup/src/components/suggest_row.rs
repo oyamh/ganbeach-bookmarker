@@ -1,9 +1,7 @@
 use std::rc::Rc;
 
-use domain::TypeCode;
+use domain::{SuggestResult, TypeCode};
 use yew::{prelude::*, virtual_dom::AttrValue};
-
-use crate::hooks::use_suggest::SuggestResult;
 
 use super::suggest_panel::set_selected_value;
 
